@@ -1,0 +1,14 @@
+#query AD for a user by their name
+get-aduser -filter 'displayname -like "*lastname*firstname*"'
+
+#If we don't know the full name
+get-aduser -filter 'displayname -like "*substringOfName*"'
+
+#grab all info on an AD account
+get-aduser USERNAME -properties *
+
+#grab a few properties on an AD account
+get-aduser USERNAME -properties * | select name,displayname,created,enabled
+
+#I don't know their last name, just their first name and department
+get-aduser -filter 'givenname -like "*firstname*"' -properties * | where department -eq "known_department"
